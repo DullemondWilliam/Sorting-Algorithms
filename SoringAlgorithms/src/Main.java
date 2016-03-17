@@ -2,10 +2,10 @@
 public class Main {
 
 	public static void main(String[] args) {
-		int[] array = {3,5,8,3,2,7,8,4,3,5,2};
+		int[] array = {3,5,8,3,2,7,8,4,3,5,2,10,12,3,5,23};
 		
 		printArray(array);
-		insertionSort(array);
+		selectionSort(array);
 		printArray(array);
 		
 	}
@@ -15,6 +15,23 @@ public class Main {
 			System.out.print(a+",");
 		}
 		System.out.println("");
+	}
+	
+	public static void selectionSort(int[] inputArray){
+		int[] workingArray = inputArray.clone();
+		for(int i=0;i<workingArray.length;i++){
+			int pos = i;
+			for(int j=i;j<workingArray.length;j++){
+				if(workingArray[pos]>workingArray[j]){
+					pos = j;
+				}
+			}
+			int temp = workingArray[pos];
+			workingArray[pos] 	= workingArray[i];
+			workingArray[i]		= temp;
+			inputArray[i]		= temp;
+		}
+		
 	}
 	
 	public static void insertionSort(int[] inputArray){
