@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Main {
@@ -17,6 +18,26 @@ public class Main {
 			System.out.print(a+",");
 		}
 		System.out.println("");
+	}
+	
+	public static Integer[] quickSort(Integer[] inputArray){
+		if(inputArray.length == 1){return inputArray;}
+		
+		ArrayList<Integer> a = new ArrayList<Integer>();
+		ArrayList<Integer> b = new ArrayList<Integer>();
+		//pick random pivot
+		int pivot = inputArray.length/2;
+		for(int i=0;i<inputArray.length;i++){
+			if(inputArray[i]>=inputArray[pivot]){
+				a.add(inputArray[i]);
+			}else{
+				b.add(inputArray[i]);
+			}
+		}
+		Integer[] x = quickSort( a.toArray(new Integer[a.size()]));
+		Integer[] y = quickSort( b.toArray(new Integer[b.size()]));
+		return (Integer[])ArrayUtils.addAll(x, y);
+		
 	}
 	
 	public static int[] mergeSort(int[] inputArray){
