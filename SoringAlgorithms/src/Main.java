@@ -4,40 +4,60 @@ import java.util.Arrays;
 public class Main {
 
 	public static void main(String[] args) {
-		int[] array = {11,9,8,7,6,23,5,34,4,3,2,12,1,45,0,12};
+		int[] array = {11,9,8,7,6,23,5,34,4,3,2,1,45,0,12};
 		
 		printArray(array);
-		array = mergeSort(array);
+		array = quickSort(array);
 		printArray(array);
 		
 	}
 
 	public static void printArray(int[] inputArray){
 		if(inputArray == null){return;}
+		System.out.print(inputArray.length+"\t: ");
 		for(int a : inputArray){
 			System.out.print(a+",");
 		}
 		System.out.println("");
 	}
 	
-	public static Integer[] quickSort(Integer[] inputArray){
-		if(inputArray.length == 1){return inputArray;}
-		
-		ArrayList<Integer> a = new ArrayList<Integer>();
-		ArrayList<Integer> b = new ArrayList<Integer>();
-		//pick random pivot
-		int pivot = inputArray.length/2;
+	public static int[] quickSort(int[] inputArray){
+		if(inputArray.length <= 1){return inputArray;}
+		int aSize = 0;
+		int bSize = 0;
+		int pivot = (int)(Math.random() * (inputArray.length));
+
 		for(int i=0;i<inputArray.length;i++){
 			if(inputArray[i]>=inputArray[pivot]){
-				a.add(inputArray[i]);
+				aSize++;
 			}else{
-				b.add(inputArray[i]);
+				bSize++;
 			}
 		}
-		Integer[] x = quickSort( a.toArray(new Integer[a.size()]));
-		Integer[] y = quickSort( b.toArray(new Integer[b.size()]));
-		return (Integer[])ArrayUtils.addAll(x, y);
+		int[] a = new int[aSize];
+		int[] b = new int[bSize];
+		int aPos = 0;
+		int bPos = 0;
+		while(aSize>aPos || bSize>bPos){
+			if(inputArray[aPos+bPos]>=inputArray[pivot]){
+				a[aPos] = inputArray[aPos+bPos];
+				aPos++;
+			}else{
+				b[bPos] = inputArray[aPos+bPos];
+				bPos++;
+			}
+		}
+		a = quickSort(a);
+		b = quickSort(b);
 		
+		for(int i=0;i<inputArray.length;i++){
+			if(i<bSize){
+				inputArray[i] = b[i];
+			}else{
+				inputArray[i] = a[i-bSize];
+			}
+		}
+		return inputArray;
 	}
 	
 	public static int[] mergeSort(int[] inputArray){
