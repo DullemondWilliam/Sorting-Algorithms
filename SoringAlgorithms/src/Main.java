@@ -1,13 +1,11 @@
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Main {
 
 	public static void main(String[] args) {
-		int[] array = {11,9,8,7,6,23,5,34,4,3,2,1,45,0,12};
-		
+		int[] array = {10,2,1,4,6,3,9,3,1,8,4,12,15};
 		printArray(array);
-		array = quickSort(array);
+		array = heapSort(array);
 		printArray(array);
 		
 	}
@@ -19,6 +17,19 @@ public class Main {
 			System.out.print(a+",");
 		}
 		System.out.println("");
+	}
+	
+	public static int[]	heapSort(int[] inputArray){
+		int i = inputArray.length-1;
+		for(;i>=0;i--){
+			if(inputArray[i]<inputArray[(i-1)/2]){
+				System.out.println("Switch "+i+" : "+(i-1)/2);
+				int temp = inputArray[(i-1)/2];
+				inputArray[(i-1)/2] = inputArray[i];
+				inputArray[i]		= temp;
+			}
+		}
+		return inputArray;
 	}
 	
 	public static int[] quickSort(int[] inputArray){
@@ -91,7 +102,7 @@ public class Main {
 		return output;
 	}
 	
-	public static void selectionSort(int[] inputArray){
+	public static int[] selectionSort(int[] inputArray){
 		int[] workingArray = inputArray.clone();
 		for(int i=0;i<workingArray.length;i++){
 			int pos = i;
@@ -105,10 +116,10 @@ public class Main {
 			workingArray[i]		= temp;
 			inputArray[i]		= temp;
 		}
-		
+		return inputArray;
 	}
 	
-	public static void insertionSort(int[] inputArray){
+	public static int[] insertionSort(int[] inputArray){
 		for(int i=0;i<inputArray.length-1;++i){
 			if(inputArray[i]>inputArray[i+1]){
 				for(int j=i;j>=0;--j){
@@ -120,9 +131,10 @@ public class Main {
 				}
 			}
 		}
+		return inputArray;
 	}
 	
-	public static void bubbleSort(int[] inputArray){
+	public static int[] bubbleSort(int[] inputArray){
 		for(int i=inputArray.length-1;i>0;--i){
 			Boolean changed = false;
 			for(int j=0;j<i;++j){
@@ -134,8 +146,9 @@ public class Main {
 				}
 
 			}
-			if(changed == false){return;}
+			if(changed == false){return inputArray;}
 		}
+		return inputArray;
 	}
 
 }
