@@ -7,7 +7,7 @@ import org.junit.Test;
 import alogrithms.*;
 
 public class AlgorithmTesting {
-	int[] array = {10,2,4,2,1,4,6,5,2,12,9,7,5,8};
+	int[] array = {10,4,1,6,2,12,9,7,5,8};
 	SortingAlgorithm sorting;
 	
 	public Boolean inOrder(int[] array){

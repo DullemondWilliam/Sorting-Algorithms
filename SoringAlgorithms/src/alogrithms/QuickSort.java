@@ -4,44 +4,52 @@ public class QuickSort extends SortingAlgorithm {
 
 	@Override
 	public int[] sort(int[] inputArray) {
+		// Base Case
+		
 		if (inputArray.length <= 1) {
+			System.out.println("BedRock");
 			return inputArray;
 		}
-		int aSize = 0;
-		int bSize = 0;
-		int pivot = (int) (Math.random() * (inputArray.length));
+
+		int pivot = (int) (inputArray.length * Math.random());
+		
+		System.out.print("Pivot ["+inputArray[pivot]+"]");
+		ArrayF.printArray(inputArray);
+		
+		int left = 0;
+		int right = 0;
+		for (int i = 0; i < inputArray.length; i++) {
+			if (inputArray[i] <= inputArray[pivot])
+				left++;
+			else
+				right++;
+		}
+		int[] leftArr = new int[left];
+		int[] rightArr = new int[right];
 
 		for (int i = 0; i < inputArray.length; i++) {
-			if (inputArray[i] >= inputArray[pivot]) {
-				aSize++;
-			} else {
-				bSize++;
-			}
+			if (inputArray[i] <= inputArray[pivot])
+				leftArr[--left] = inputArray[i];
+			else
+				rightArr[--right] = inputArray[i];
 		}
-		int[] a = new int[aSize];
-		int[] b = new int[bSize];
-		int aPos = 0;
-		int bPos = 0;
-		while (aSize > aPos || bSize > bPos) {
-			if (inputArray[aPos + bPos] >= inputArray[pivot]) {
-				a[aPos] = inputArray[aPos + bPos];
-				aPos++;
-			} else {
-				b[bPos] = inputArray[aPos + bPos];
-				bPos++;
-			}
+		// Send Down
+		if(leftArr.length > 1){
+			leftArr  = sort(leftArr);
 		}
-		a = sort(a);
-		b = sort(b);
-
+		if(rightArr.length > 1){
+			rightArr = sort(rightArr);
+		}
+		
+		
 		for (int i = 0; i < inputArray.length; i++) {
-			if (i < bSize) {
-				inputArray[i] = b[i];
-			} else {
-				inputArray[i] = a[i - bSize];
-			}
+			if (i < leftArr.length)
+				inputArray[i] = leftArr[i];
+			else
+				inputArray[i] = rightArr[i - leftArr.length];
 		}
 		return inputArray;
+
 	}
 
 }

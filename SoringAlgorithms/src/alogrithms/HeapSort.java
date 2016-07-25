@@ -29,16 +29,12 @@ public class HeapSort extends SortingAlgorithm {
 		int[] outputArray = new int[arrSize];
 		
 		while(arrSize > 0){
-			System.out.print("In -");
-			ArrayF.printArray(inputArray);
 			outputArray[inputArray.length-arrSize] = inputArray[0];
 			arrSize--;
 			inputArray[0] = inputArray[arrSize];
 			inputArray[arrSize] = -1;
 			//Trickle down
 			inputArray = trickleDown(inputArray,arrSize);
-			System.out.print("Out-");
-			ArrayF.printArray(outputArray);
 		}
 		
 		
