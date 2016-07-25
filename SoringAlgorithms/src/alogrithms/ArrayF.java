@@ -1,3 +1,4 @@
+package alogrithms;
 
 public class ArrayF {
 	public static void printArray(int[] inputArray){
